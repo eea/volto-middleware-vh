@@ -1,5 +1,5 @@
-# volto-addon-template
-[![Releases](https://img.shields.io/github/v/release/eea/volto-addon-template)](https://github.com/eea/volto-addon-template/releases)
+# volto-middleware-rdf
+[![Releases](https://img.shields.io/github/v/release/eea/volto-middleware-rdf)](https://github.com/eea/volto-middleware-rdf/releases)
 
 [Volto](https://github.com/plone/volto) add-on
 
@@ -14,18 +14,18 @@ Demo GIF
 1. Create new volto project if you don't already have one:
     ```
     $ npm install -g yo @plone/generator-volto
-    $ yo @plone/volto my-volto-project --addon @eeacms/volto-addon-template
+    $ yo @plone/volto my-volto-project --addon @eeacms/volto-middleware-rdf
     $ cd my-volto-project
     ```
 
 1. If you already have a volto project, just update `package.json`:
     ``` JSON
     "addons": [
-        "@eeacms/volto-addon-template"
+        "@eeacms/volto-middleware-rdf"
     ],
 
     "dependencies": {
-        "@eeacms/volto-addon-template": "1.0.0"
+        "@eeacms/volto-middleware-rdf": "1.0.0"
     }
     ```
 
@@ -41,14 +41,14 @@ Demo GIF
 
 ## How to contribute
 
-See [DEVELOP.md](https://github.com/eea/volto-addon-template/blob/master/DEVELOP.md).
+See [DEVELOP.md](https://github.com/eea/volto-middleware-rdf/blob/master/DEVELOP.md).
 
 ## Copyright and license
 
 The Initial Owner of the Original Code is European Environment Agency (EEA).
 All Rights Reserved.
 
-See [LICENSE.md](https://github.com/eea/volto-addon-template/blob/master/LICENSE.md) for details.
+See [LICENSE.md](https://github.com/eea/volto-middleware-rdf/blob/master/LICENSE.md) for details.
 
 ## Funding
 
