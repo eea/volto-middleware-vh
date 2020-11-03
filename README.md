@@ -5,9 +5,8 @@
 
 ## Features
 
-###
-
-Demo GIF
+This package offers an Express middleware for eea.rdfmarshaller's ``@@rdf``
+view, piping the backend resource with a proper VH-aware request.
 
 ## Getting started
 
