@@ -2,14 +2,14 @@ import superagent from 'superagent';
 import cookie from 'react-cookie';
 import { parse as parseUrl } from 'url';
 
-import { settings } from '~/config';
+import config from '@plone/volto/registry';
 
 export const getAPIResourceWithAuth = (req) =>
   new Promise((resolve) => {
     const internalApiUrl = parseUrl(
-      settings.internalApiPath || settings.apiPath,
+      config.settings.internalApiPath || config.settings.apiPath,
     );
-    const apiUrl = parseUrl(settings.apiPath);
+    const apiUrl = parseUrl(config.settings.apiPath);
 
     const scheme = apiUrl.protocol.slice(0, apiUrl.protocol.length - 1);
 
