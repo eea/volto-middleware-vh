@@ -5,9 +5,37 @@
 
 ## Features
 
-This package offers an Express middleware virtual hosting using the Virtual Host Monster of ZOPE.
+This package offers an Express middleware virtual hosting using the Virtual Host Monster of ZOPE. (https://zope.readthedocs.io/en/latest/zopebook/VirtualHosting.html)
 
 ## Getting started
+
+This package requires a config setting `virtualHostedPaths`, an array of paths that will go through vh, which can be set in the theme addon. Also the theme addon needs to be placed above volto-middleware-vh in the addons dependency list.
+
+### Example of usage:
+
+Let's say we have:
+```
+frontend (volto)    at http://frontend.com
+zope                at http://backend.com
+backend (plone)     at http://backend.com/api
+```
+ If we have an rss feed located at `http://backend.com/api/news/RSS` the content will contain urls pointing to the backend instead of frontend.
+
+```
+~ your-theme/index.js
+
+function applyConfig(config) {
+    ...
+    config.settings.virtualHostedPaths = ['**/RSS']
+    ...
+}
+```
+By setting the virtualHostedPaths array, with only `['**/RSS']` in this case, volto-middleware-vh will enable virtual hosting for all the routes that ends with `/RSS` and the request will look something like:
+```
+http://backend.com/VirtualHostBase/http/frontend.com/api/VirtualHostRoot/news/RSS
+```
+and will respond with all the urls pointing to the frontend.
+
 
 1. Create new volto project if you don't already have one:
     ```
@@ -16,9 +44,10 @@ This package offers an Express middleware virtual hosting using the Virtual Host
     $ cd my-volto-project
     ```
 
-1. If you already have a volto project, just update `package.json`:
+2. If you already have a volto project, just update `package.json`:
     ``` JSON
     "addons": [
+        "your-theme",   // this will contain the virtualHostedPaths setting
         "@eeacms/volto-middleware-vh"
     ],
 
@@ -27,15 +56,15 @@ This package offers an Express middleware virtual hosting using the Virtual Host
     }
     ```
 
-1. Install new add-ons and restart Volto:
+3. Install new add-ons and restart Volto:
     ```
     $ yarn
     $ yarn start
     ```
 
-1. Go to http://localhost:3000
+4. Go to http://localhost:3000
 
-1. Happy editing!
+5. Happy editing!
 
 ## How to contribute
 
