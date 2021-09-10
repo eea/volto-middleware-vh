@@ -47,7 +47,7 @@ and will respond with all the urls pointing to the frontend.
 2. If you already have a volto project, just update `package.json`:
     ``` JSON
     "addons": [
-        "your-theme",   // this will contain the virtualHostedPaths setting
+        "your-theme",
         "@eeacms/volto-middleware-vh"
     ],
 
