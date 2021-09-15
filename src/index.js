@@ -40,30 +40,30 @@ export const getAPIResourceWithAuth = (req) => {
 };
 
 export default (config) => {
-  const vhPaths = config.settings.virtualHostedPaths || [];
-
-  if (__SERVER__ && vhPaths.length) {
-    const express = require('express');
-    const middleware = express.Router();
-
-    vhPaths.forEach((path) => {
-      middleware.all(path, function (req, res) {
-        getAPIResourceWithAuth(req)
-          .then((resource) => {
-            res.set('Content-Type', 'text/plain');
-            res.send(resource);
-          })
-          .catch((error) => {
-            res.status(error.status).send(error);
-          });
+  if (__SERVER__) {
+    const vhPaths = config.settings.virtualHostedPaths || [];
+    if (vhPaths.length) {
+      const express = require('express');
+      const middleware = express.Router();
+      vhPaths.forEach((path) => {
+        middleware.all(path, function (req, res) {
+          getAPIResourceWithAuth(req)
+            .then((resource) => {
+              res.set('Content-Type', 'text/plain');
+              res.send(resource);
+            })
+            .catch((error) => {
+              res.status(error.status).send(error);
+            });
+        });
       });
-    });
-    middleware.id = 'vh-proxy-middleware';
+      middleware.id = 'vh-proxy-middleware';
 
-    config.settings.expressMiddleware = [
-      ...config.settings.expressMiddleware,
-      middleware,
-    ];
+      config.settings.expressMiddleware = [
+        ...config.settings.expressMiddleware,
+        middleware,
+      ];
+    }
   }
   return config;
 };
