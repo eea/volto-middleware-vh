@@ -18,8 +18,13 @@ const getVirtualHost = () => {
   const apiUrl = parseUrl(settings.apiPath);
   const publicUrl = parseUrl(settings.publicURL);
   const apiProtocol = apiUrl.protocol.slice(0, apiUrl.protocol.length - 1);
+  const virtualHost =
+    settings.virtualHost ||
+    `/${apiProtocol}/${publicUrl.hostname}${
+      __DEVELOPMENT__ ? `:${publicUrl.port}` : ''
+    }${internalApiUrl.path}`;
 
-  return `${internalApiUrl.protocol}//${internalApiUrl.host}/VirtualHostBase/${apiProtocol}/${publicUrl.host}${internalApiUrl.path}/VirtualHostRoot`;
+  return `${internalApiUrl.protocol}//${internalApiUrl.host}/VirtualHostBase${virtualHost}/VirtualHostRoot`;
 };
 
 export const getAPIResourceWithAuth = (req) => {
