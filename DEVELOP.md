@@ -1,4 +1,4 @@
-# volto-middleware-rdf
+# volto-middleware-vh
 
 ## Develop
 
@@ -12,15 +12,15 @@ Before starting make sure your development environment is properly set. See [Vol
 
 1. Create new volto app
 
-        $ yo @plone/volto my-volto-project --addon @eeacms/volto-middleware-rdf
+        $ yo @plone/volto my-volto-project --addon @eeacms/volto-middleware-vh
         $ cd my-volto-project
 
 1. Add the following to `mrs.developer.json`:
 
         {
-            "volto-middleware-rdf": {
-                "url": "https://github.com/eea/volto-middleware-rdf.git",
-                "package": "@eeacms/volto-middleware-rdf",
+            "volto-middleware-vh": {
+                "url": "https://github.com/eea/volto-middleware-vh.git",
+                "package": "@eeacms/volto-middleware-vh",
                 "branch": "develop",
                 "path": "src"
             }
@@ -49,4 +49,4 @@ Before starting make sure your development environment is properly set. See [Vol
 
 1. Happy hacking!
 
-        $ cd src/addons/volto-middleware-rdf/
+        $ cd src/addons/volto-middleware-vh/
