@@ -9,7 +9,8 @@ This package offers an Express middleware virtual hosting using the Virtual Host
 
 ## Getting started
 
-This package requires a config setting `virtualHostedPaths`, an array of paths that will go through vh, which can be set in the theme addon. Also the theme addon needs to be placed above volto-middleware-vh in the addons dependency list.
+This package requires a config setting `virtualHostedPaths` or an env `RAZZLE_VIRTUAL_HOSTED_PATHS`, an array of paths that will go through vh, which can be set in the theme addon. Also the theme addon needs to be placed above volto-middleware-vh in the addons dependency list.
+You can also set a `virtualHost` config setting or `RAZZLE_VIRTUAL_HOST` env which will be used as the new host by Virtual Host Monster 
 
 ### Example of usage:
 

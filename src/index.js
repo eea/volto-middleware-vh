@@ -14,12 +14,13 @@ const getReqPath = (req) => {
 
 const getVirtualHost = () => {
   const { settings } = config;
+  const vh = process.env.RAZZLE_VIRTUAL_HOST || settings.virtualHost;
   const internalApiUrl = parseUrl(settings.internalApiPath || settings.apiPath);
   const apiUrl = parseUrl(settings.apiPath);
   const publicUrl = parseUrl(settings.publicURL);
   const apiProtocol = apiUrl.protocol.slice(0, apiUrl.protocol.length - 1);
   const virtualHost =
-    settings.virtualHost ||
+    vh ||
     `/${apiProtocol}/${publicUrl.hostname}${
       __DEVELOPMENT__ ? `:${publicUrl.port}` : ''
     }${internalApiUrl.path}`;
@@ -46,7 +47,10 @@ export const getAPIResourceWithAuth = (req) => {
 
 export default (config) => {
   if (__SERVER__) {
-    const vhPaths = config.settings.virtualHostedPaths || [];
+    const vhPaths =
+      process.env.RAZZLE_VIRTUAL_HOSTED_PATHS?.split(',') ||
+      config.settings.virtualHostedPaths ||
+      [];
     if (vhPaths.length) {
       const express = require('express');
       const middleware = express.Router();
