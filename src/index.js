@@ -5,6 +5,10 @@ import { parse as parseUrl } from 'url';
 
 import config from '@plone/volto/registry';
 
+const getProtocol = (protocol) => {
+  return protocol?.slice(0, protocol.length - 1) || '';
+};
+
 const getReqPath = (req) => {
   const reqPath = req.path;
   const reqQuery = qs.stringify(req.query);
@@ -15,15 +19,15 @@ const getReqPath = (req) => {
 const getVirtualHost = () => {
   const { settings } = config;
   const vh = process.env.RAZZLE_VIRTUAL_HOST || settings.virtualHost;
+  const vhUrl = vh ? parseUrl(vh) : null;
   const internalApiUrl = parseUrl(settings.internalApiPath || settings.apiPath);
   const apiUrl = parseUrl(settings.apiPath);
   const publicUrl = parseUrl(settings.publicURL);
-  const apiProtocol = apiUrl.protocol.slice(0, apiUrl.protocol.length - 1);
-  const virtualHost =
-    vh ||
-    `/${apiProtocol}/${publicUrl.hostname}${
-      __DEVELOPMENT__ ? `:${publicUrl.port}` : ''
-    }${internalApiUrl.path}`;
+  const virtualHost = vhUrl
+    ? `/${getProtocol(vhUrl.protocol)}/${vhUrl.host}:80${internalApiUrl.path}`
+    : `/${getProtocol(apiUrl.protocol)}/${publicUrl.host}:80${
+        internalApiUrl.path
+      }`;
 
   return `${internalApiUrl.protocol}//${internalApiUrl.host}/VirtualHostBase${virtualHost}/VirtualHostRoot`;
 };
