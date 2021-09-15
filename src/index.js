@@ -5,8 +5,13 @@ import { parse as parseUrl } from 'url';
 
 import config from '@plone/volto/registry';
 
-const getProtocol = (protocol) => {
-  return protocol?.slice(0, protocol.length - 1) || '';
+const getProtocol = (url) => {
+  return url?.protocol?.slice(0, url.protocol.length - 1) || '';
+};
+
+const getDefaultPort = (url) => {
+  const protocol = getProtocol(url);
+  return protocol === 'http' ? ':80' : ':443';
 };
 
 const getReqPath = (req) => {
@@ -24,10 +29,12 @@ const getVirtualHost = () => {
   const apiUrl = parseUrl(settings.apiPath);
   const publicUrl = parseUrl(settings.publicURL);
   const virtualHost = vhUrl
-    ? `/${getProtocol(vhUrl.protocol)}/${vhUrl.host}:80${internalApiUrl.path}`
-    : `/${getProtocol(apiUrl.protocol)}/${publicUrl.host}:80${
+    ? `/${getProtocol(vhUrl)}/${vhUrl.hostname}${getDefaultPort(vhUrl)}${
         internalApiUrl.path
-      }`;
+      }`
+    : `/${getProtocol(apiUrl)}/${
+        __DEVELOPMENT__ ? publicUrl.host : publicUrl.hostname
+      }${getDefaultPort(apiUrl)}${internalApiUrl.path}`;
 
   return `${internalApiUrl.protocol}//${internalApiUrl.host}/VirtualHostBase${virtualHost}/VirtualHostRoot`;
 };
