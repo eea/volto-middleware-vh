@@ -1,7 +1,9 @@
 # volto-middleware-vh
 [![Releases](https://img.shields.io/github/v/release/eea/volto-middleware-vh)](https://github.com/eea/volto-middleware-vh/releases)
 
-[Volto](https://github.com/plone/volto) add-on
+[Volto](https://github.com/plone/volto) add-on - Express middleware virtual hosting
+
+#### IMPORTANT! Because of the way it works, you should always load this addon as the last addon in Volto project configuration.
 
 ## Features
 
@@ -9,7 +11,7 @@ This package offers an Express middleware virtual hosting using the Virtual Host
 
 ## Getting started
 
-This package requires a config setting `virtualHostedPaths` or an env `RAZZLE_VIRTUAL_HOSTED_PATHS`, an array of paths that will go through vh, which can be set in the theme addon. Also the theme addon needs to be placed above volto-middleware-vh in the addons dependency list.
+This package requires a config setting `virtualHostedPaths` or an env `RAZZLE_VIRTUAL_HOSTED_PATHS`, an array of paths that will go through vh, which can be set in the theme addon. Also the theme addon **needs to be placed above** volto-middleware-vh in the addons dependency list.
 You can also set a `virtualHost` config setting or `RAZZLE_VIRTUAL_HOST` env which will be used as the new host by Virtual Host Monster 
 
 ### Example of usage:
