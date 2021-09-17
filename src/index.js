@@ -69,7 +69,7 @@ export default (config) => {
         middleware.all(path, function (req, res) {
           getAPIResourceWithAuth(req)
             .then((resource) => {
-              res.set('Content-Type', 'text/plain');
+              res.set('Content-Type', 'text/html');
               res.send(resource);
             })
             .catch((error) => {
