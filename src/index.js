@@ -51,7 +51,7 @@ export const getAPIResourceWithAuth = (req) => {
       if (error) {
         return reject(error);
       }
-      return resolve(res.text);
+      return resolve(res);
     });
   });
 };
@@ -69,8 +69,9 @@ export default (config) => {
         middleware.all(path, function (req, res) {
           getAPIResourceWithAuth(req)
             .then((resource) => {
-              res.set('Content-Type', 'text/plain');
-              res.send(resource);
+              const content_type = resource.get('content-type');
+              res.set('Content-Type', content_type);
+              res.send(resource.text);
             })
             .catch((error) => {
               res.status(error.status).send(error);
