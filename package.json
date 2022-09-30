@@ -19,7 +19,8 @@
   "devDependencies": {
     "release-it": "*",
     "@cypress/code-coverage": "^3.9.5",
-    "babel-plugin-transform-class-properties": "^6.24.1"
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "md5": "^2.3.0"
   },
   "scripts": {
     "bootstrap": "npm install -g ejs; npm link ejs; node bootstrap",
