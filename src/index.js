@@ -1,5 +1,5 @@
 import superagent from 'superagent';
-import cookie from 'react-cookie';
+import { cookie } from 'react-cookie';
 import qs from 'querystring';
 import { parse as parseUrl } from 'url';
 
