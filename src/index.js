@@ -56,7 +56,7 @@ export const getAPIResourceWithAuth = (req) => {
   });
 };
 
-export default (config) => {
+const applyConfig = (config) => {
   if (__SERVER__) {
     const vhPaths =
       process.env.RAZZLE_VIRTUAL_HOSTED_PATHS?.split(',') ||
@@ -88,3 +88,5 @@ export default (config) => {
   }
   return config;
 };
+
+export default applyConfig;
