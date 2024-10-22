@@ -1,6 +1,6 @@
 {
   "name": "@eeacms/volto-middleware-vh",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "volto-middleware-vh: Volto add-on",
   "main": "src/index.js",
   "author": "European Environment Agency: IDM2 A-Team",
@@ -17,9 +17,37 @@
     "url": "git@github.com:eea/volto-middleware-vh.git"
   },
   "devDependencies": {
-    "release-it": "*",
-    "@cypress/code-coverage": "^3.9.5",
-    "babel-plugin-transform-class-properties": "^6.24.1"
+    "cypress": "13.1.0",
+    "@cypress/code-coverage": "^3.10.0",
+    "@plone/scripts": "*",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "cypress-fail-fast": "^5.0.1",
+    "dotenv": "^16.3.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "md5": "^2.3.0",
+    "release-it": "*"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "make lint-fix",
+      "make prettier-fix"
+    ],
+    "src/**/*.{jsx}": [
+      "make i18n"
+    ],
+    "theme/**/*.{css,less}": [
+      "make stylelint-fix"
+    ],
+    "src/**/*.{css,less}": [
+      "make stylelint-fix"
+    ],
+    "theme/**/*.overrides": [
+      "make stylelint-fix"
+    ],
+    "src/**/*.overrides": [
+      "make stylelint-fix"
+    ]
   },
   "scripts": {
     "bootstrap": "npm install -g ejs; npm link ejs; node bootstrap",
@@ -34,6 +62,7 @@
     "cypress:open": "../../../node_modules/cypress/bin/cypress open",
     "release": "release-it",
     "release-major-beta": "release-it major --preRelease=beta",
-    "release-beta": "release-it --preRelease=beta"
+    "release-beta": "release-it --preRelease=beta",
+    "prepare": "husky install"
   }
 }
