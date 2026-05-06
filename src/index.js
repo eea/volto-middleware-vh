@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 import { cookie } from 'react-cookie';
-import qs from 'querystring';
 import { parse as parseUrl } from 'url';
 
 import config from '@plone/volto/registry';
@@ -16,7 +15,9 @@ const getDefaultPort = (url) => {
 
 const getReqPath = (req) => {
   const reqPath = req.path;
-  const reqQuery = qs.stringify(req.query);
+  const reqQuery = req.query
+    ? new URLSearchParams(req.query).toString()
+    : '';
 
   return !reqQuery ? reqPath : `${reqPath}?${reqQuery}`;
 };
