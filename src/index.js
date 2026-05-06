@@ -15,9 +15,7 @@ const getDefaultPort = (url) => {
 
 const getReqPath = (req) => {
   const reqPath = req.path;
-  const reqQuery = req.query
-    ? new URLSearchParams(req.query).toString()
-    : '';
+  const reqQuery = req.query ? new URLSearchParams(req.query).toString() : '';
 
   return !reqQuery ? reqPath : `${reqPath}?${reqQuery}`;
 };
