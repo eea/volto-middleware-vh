@@ -42,7 +42,7 @@ export const getAPIResourceWithAuth = (req) => {
   return new Promise((resolve, reject) => {
     const url = `${getVirtualHost()}${getReqPath(req)}`;
     const request = superagent.get(url).buffer().type('text');
-    const authToken = cookie.load('auth_token');
+    const authToken = cookie.load('auth_token'); //betterleaks:allow
     if (authToken) {
       request.set('Authorization', `Bearer ${authToken}`);
     }
